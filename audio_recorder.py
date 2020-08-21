@@ -18,6 +18,10 @@
 #         o      o       o       o
 #               GPIO2   GPIO3
 #
+#   Optionally set to run on Raspberry boot, by editing crontab. In my case:
+#   1) crontab -e
+#   2) add line:   @reboot python3 /home/pi/sw_dev/audio_recorder/audio_recorder.py &
+#
 # *******************************************************************************************
 
 import RPi.GPIO as GPIO
