@@ -1,14 +1,31 @@
 # *******************************************************************************************
-#                           audio_recorder.py
-#   Test program:
+#                           audio_recorder.py V1.00
+#   Small program to record audio captured in USB port installed on Raspberry 4.
+#
+#   The program will acquire audio from the default card registered in Alsa utility:
+#   1) run lsusb --> Show the existing USB devices
+#   2) Run aplay -l --> displays the audio devices registered in the Raspberry.
+#   3) Define the default audio card: edit /usr/share/alsa/alsa.conf and set:
+#                default.ctl.card = x (x= 1,2,3,...)
+#                default.pcm.card = x
+#   4) If desired, adjust Iin/out audio levels with alsamixer utility
+#
 #   - When GPIO-2 (button to ground) is pressed, interrupt callback_button_pressed is invoked
-#   - LED attached to GPIO-3 is set to on/off
+#   - LED attached to GPIO-3 is set to on (recording) or off (not recording)
+#
+#                       GND               GPIO2: push button to GND
+#         o      o       o       o        GPIO3: resistor 220 ohm in series with LED to GND
+#         o      o       o       o
+#               GPIO2   GPIO3
+#
+
 #
 # *******************************************************************************************
 
 import RPi.GPIO as GPIO
 import pyaudio
 from datetime import datetime
+import time
 import wave
 import signal
 
@@ -47,6 +64,7 @@ def main():
 # -----
 
     p = pyaudio.PyAudio()                                            # Instantiate pyaudio
+    time.sleep(3)
     stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE,     # Create audio stream
                     input=True, frames_per_buffer=CHUNK, start = False,    # Don't start the stream immediately
                     stream_callback=callback_audio())
@@ -72,7 +90,6 @@ def main():
     stream.close()
     p.terminate()
     GPIO.cleanup()    # cleanup and exit
-    print"Program exiting... "
     exit()
 
 
