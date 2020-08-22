@@ -42,7 +42,7 @@ GPIO_LED = 3               # GPIO 3 is the LED recordding indicator
 
 # ------------ Timeout thresholds
 INIT_TIMEOUT = 3600
-IDLE_TIMEOUT = 1800
+IDLE_TIMEOUT = 3600
 
 # --------- Global variables
 pressed = False
