@@ -3,12 +3,13 @@ Audio recording utility in python, designed to run on Raspberry pi 4 model B+.
 
 HW adaptation:
   The program will acquire audio from the default card registered in Alsa utility:
-1) run lsusb --> Show the existing USB devices
-2) Run aplay -l --> displays the audio devices registered in the Raspberry.
-3) Define the default audio card: edit /usr/share/alsa/alsa.conf and set:
+1) install pyaudio 
+2) run lsusb --> Show the existing USB devices
+3) Run aplay -l --> displays the audio devices registered in the Raspberry.
+4) Define the default audio card: edit /usr/share/alsa/alsa.conf and set:
       default.ctl.card = x (x= 1,2,3,...)
                default.pcm.card = x
-4) If desired, adjust in/out audio levels with alsamixer utility
+5) If necessary, adjust in/out audio levels with alsamixer utility
 
 - When GPIO-2 (button to ground) is pressed, interrupt callback_button_pressed is invoked
 - LED attached to GPIO-3 is set to on (recording) or off (not recording)
