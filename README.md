@@ -20,7 +20,8 @@ HW adaptation:
                GPIO2   GPIO3
 
 August 23, 2020:
-----------------
+
+-------
 I faced the following problem when trying to configure the program to run at boot time:
 The program will crash when you initiate the USB sound card with a sampling rate different than 14400.
 (error 9997 Invalid sample rte issued by pyaudio library)
